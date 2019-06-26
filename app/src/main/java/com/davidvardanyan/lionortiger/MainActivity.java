@@ -30,15 +30,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        playerChoices[0] = Player.No;
-        playerChoices[1] = Player.No;
-        playerChoices[2] = Player.No;
-        playerChoices[3] = Player.No;
-        playerChoices[4] = Player.No;
-        playerChoices[5] = Player.No;
-        playerChoices[6] = Player.No;
-        playerChoices[7] = Player.No;
-        playerChoices[8] = Player.No;
+        for (int index = 0;index < playerChoices.length;index++){
+            playerChoices[index] = Player.No;
+        }
+
 
         btnReset = findViewById(R.id.btnReset);
        gridLayout = findViewById(R.id.gridLayout);
@@ -84,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
                         && playerChoices[winnerColumns[1]]
                         == playerChoices[winnerColumns[2]] &&
                         playerChoices[winnerColumns[0]] != Player.No) {
-                     btnReset.setVisibility(View.VISIBLE);
+
                     gameOver = true;
 
                     String winnerOfGame = "" ;
@@ -113,17 +108,13 @@ public class MainActivity extends AppCompatActivity {
        }
 
         currentPlayer = Player.ONE;
-        playerChoices[0] = Player.No;
-        playerChoices[1] = Player.No;
-        playerChoices[2] = Player.No;
-        playerChoices[3] = Player.No;
-        playerChoices[4] = Player.No;
-        playerChoices[5] = Player.No;
-        playerChoices[6] = Player.No;
-        playerChoices[7] = Player.No;
-        playerChoices[8] = Player.No;
+
+        for (int index = 0;index < playerChoices.length;index++){
+            playerChoices[index] = Player.No;
+        }
 
         gameOver = false;
+
     }
 
 }
