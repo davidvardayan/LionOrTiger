@@ -2,7 +2,9 @@ package com.davidvardanyan.lionortiger;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayout;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -18,6 +20,11 @@ public class MainActivity extends AppCompatActivity {
 
     int[][] winnerRowsColumns = {{0,1,2},{3,4,5},{6,7,8},{0,3,6},{1,4,7},{2,5,8},{0,4,8},{2,4,6}};
 
+    private boolean gameOver = false;
+
+    private Button btnReset;
+    private GridLayout gridLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +39,16 @@ public class MainActivity extends AppCompatActivity {
         playerChoices[6] = Player.No;
         playerChoices[7] = Player.No;
         playerChoices[8] = Player.No;
+
+        btnReset = findViewById(R.id.btnReset);
+       gridLayout = findViewById(R.id.gridLayout);
+
+        btnReset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                resetTheGame();
+            }
+        });
     }
 
 
@@ -40,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         ImageView tappedImageView = (ImageView) imageView;
         int tiTag = Integer.parseInt(tappedImageView.getTag().toString());
 
-        if (playerChoices[tiTag] == Player.No) {
+        if (playerChoices[tiTag] == Player.No && gameOver == false) {
 
 
             tappedImageView.setTranslationX(-2000);
@@ -67,6 +84,8 @@ public class MainActivity extends AppCompatActivity {
                         && playerChoices[winnerColumns[1]]
                         == playerChoices[winnerColumns[2]] &&
                         playerChoices[winnerColumns[0]] != Player.No) {
+                     btnReset.setVisibility(View.VISIBLE);
+                    gameOver = true;
 
                     String winnerOfGame = "" ;
 
@@ -82,6 +101,29 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
+    }
+
+    //Reset Game Function
+
+    private void resetTheGame(){
+       for (int index = 0;index < gridLayout.getChildCount();index++) {
+           ImageView imageView =  (ImageView) gridLayout.getChildAt(index);
+           imageView.setImageDrawable(null);
+           imageView.setAlpha(0.2f);
+       }
+
+        currentPlayer = Player.ONE;
+        playerChoices[0] = Player.No;
+        playerChoices[1] = Player.No;
+        playerChoices[2] = Player.No;
+        playerChoices[3] = Player.No;
+        playerChoices[4] = Player.No;
+        playerChoices[5] = Player.No;
+        playerChoices[6] = Player.No;
+        playerChoices[7] = Player.No;
+        playerChoices[8] = Player.No;
+
+        gameOver = false;
     }
 
 }
